@@ -13,8 +13,8 @@ export class User {
   providedIn: 'root'
 })
 export class AuthService {
-  uri = "http://localhost:8010/api/users";
-  //uri = "https://api-cours-angular-2023.herokuapp.com/api/users";
+  // uri = "http://localhost:8010/api/users";
+  uri = "https://api-angular.onrender.com/api/users";
   loggedIn = false;
   admin = false;
   constructor(private http: HttpClient) { }

@@ -15,13 +15,15 @@ export class AddAssignmentComponent implements OnInit {
   nom: string = '';
   dateLimite!: Date;
   promotions = ['L3', 'M1', 'M2']
-  matiere !:Subject[];
+  matieres !:Subject[];
+  promotionSelectionnee!: string;
+  matiereSelectionnee!: string;
   constructor(private subjectsService: SubjectsService, private assignementComponent: AssignmentsComponent, private assignmentsService:AssignmentsService, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.subjectsService.getSubjects().subscribe((subjects) => {
       if (subjects) {
-        this.matiere = subjects;
+        this.matieres = subjects;
       }
     });
   }
@@ -31,10 +33,10 @@ export class AddAssignmentComponent implements OnInit {
     const newAssignment = new Assignment();
     newAssignment.nom = this.nom;
     newAssignment.dateLimite = this.dateLimite;
-    // newAssignment.formationConcernee = this.promotions.toString();
-    // newAssignment.nomMatiere = this.matiere[0].toString();
+    newAssignment.formationConcernee = this.promotionSelectionnee;
+    newAssignment.matiere = this.matiereSelectionnee;
     newAssignment.etat = false;
-
+    console.log(newAssignment);
     this.assignmentsService.addAssignment(newAssignment)
       .subscribe(reponse => {
         console.log(reponse.message);
@@ -42,12 +44,11 @@ export class AddAssignmentComponent implements OnInit {
   }
 
   changeMatiere(eventValue: string) {
-    this.assignementComponent.setMatiereFilter(eventValue);
+    this.matiereSelectionnee = eventValue;
   }
 
   changePromotion(eventValue: string) {
-    console.log(eventValue);
-    this.assignementComponent.setPromotionFilter(eventValue);
+    this.promotionSelectionnee = eventValue;
   }
 
   durationInSeconds = 5;

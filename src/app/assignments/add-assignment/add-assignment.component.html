@@ -24,14 +24,18 @@
       <mat-form-field appearance="fill">
         <mat-label>Promotion</mat-label>
         <mat-select (selectionChange)="changePromotion($event.value)" required>
-          <mat-option *ngFor="let promotion of promotions" [value]="promotion" > {{ promotion }} </mat-option>
+          <mat-option *ngFor="let promotion of promotions" [value]="promotion"> {{ promotion }} </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Matière</mat-label>
-        <mat-select required>
-          <mat-option></mat-option>
+        <mat-select (selectionChange)="changeMatiere($event.value)" required>
+          <mat-option *ngFor="let matiere of matieres" [value]="matiere._id">
+            <div style="display: flex; align-items: center">
+              {{ matiere.libelle}} - {{ matiere.prof}}
+            </div>
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>

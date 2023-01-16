@@ -40,16 +40,17 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   constructor(private assignmentsService: AssignmentsService, private AuthService: AuthService, private router: Router, private subjectService: SubjectsService) { }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
     this.subjectService.getSubjects().subscribe((subjects) => {
       if (subjects) {
         this.subjects = subjects;
       }
+      this.paginator.pageIndex = 1;
+      this.loadData();
+      this.dataSource.sort = this.sort;
     });
-  }
-
-  ngAfterViewInit() {
-    this.loadData();
-    this.dataSource.sort = this.sort;
   }
 
   loadData() {
@@ -72,13 +73,19 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
           return observableOf([]);
         })
       ).subscribe(data => {
-        data.forEach((assignment: Assignment) => {
-          this.subjects.forEach((subject: Subject) => {
-            if (assignment.matiere === subject._id) {
-              assignment.nomMatiere = subject.libelle.toString();
+        if (data) {
+          data.forEach((assignment: Assignment) => {
+            if (this.subjects) {
+              this.subjects.forEach((subject: Subject) => {
+                if (assignment.matiere === subject._id) {
+                  assignment.nomMatiere = subject.libelle.toString();
+                }
+              });
             }
+
           });
-        });
+        }
+
         this.dataSource.data = data
       });
 
@@ -91,7 +98,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   }
 
   callApi() {
-    this.paginator.pageIndex = 0;
+    this.paginator.pageIndex = 1;
     this.loadData();
   }
 

@@ -13,8 +13,8 @@ export class AssignmentsService {
   constructor(private logginService: LoggingService,
     private http: HttpClient) { }
 
-  uri = "http://localhost:8010/api/assignments";
-  //uri = "https://api-cours-angular-2023.herokuapp.com/api/assignments";
+  // uri = "http://localhost:8010/api/assignments";
+  uri = "https://api-angular.onrender.com/api/assignments";
 
   getAssignments(): Observable<Assignment[]> {
     return this.http.get<Assignment[]>(this.uri)
@@ -48,13 +48,12 @@ export class AssignmentsService {
     return this.http.post<Assignment>(this.uri, assignment);
   }
 
-  updateAssignment(assignment: Assignment): Observable<string> {
+  updateAssignment(assignment: Assignment): Observable<Assignment> {
     // On n'a besoin de rien faire pour le moment, puisque l'assignment est passé par référence
     // et que l'objet est modifié dans le tableau
     // Plus tard on utilisera un Web Service distant...
-    this.logginService.log(assignment.nom, "modifié !");
+    return this.http.put<Assignment>(this.uri, assignment)
 
-    return of("Assignment modifié");
   }
 
   deleteAssignement(assignmentId: string): Observable<string> {

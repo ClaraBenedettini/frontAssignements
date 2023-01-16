@@ -31,7 +31,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import { RouterModule, Routes } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
-import { AuthGuard } from './shared/auth.guard';
 import { HeaderComponent } from './assignments/header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -45,7 +44,6 @@ const routes: Routes = [
   {
     path: 'assignment/:id/edit',
     component: EditAssignmentComponent,
-    canActivate: [AuthGuard]
   }
 ]
 @NgModule({

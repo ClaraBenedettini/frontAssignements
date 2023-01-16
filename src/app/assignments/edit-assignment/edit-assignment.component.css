@@ -1,5 +1,65 @@
-.form {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+
+.container{
   display: flex;
   flex-direction: column;
-  margin: 5px;
+  justify-content: center;  
+}
+
+h1{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #2F2F2F;
+  margin-left: 35px;
+  text-align: center;
+  margin: 80px 0px 0px 0px;
+}
+
+img{
+  width: 8%;
+  height: 15%;
+  margin-left: 48%;
+  margin-top: 15px;
+}
+
+.form {
+  margin: 50px auto 0px auto;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+}
+
+.form-fields{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-form-field{
+  margin: 0px 0px 0px 35px;
+  width: 270px;
+}
+
+.mat-raised-button{
+  margin: 40px 0px 0px 0px;
+  background-color: #089cc5;
+  color: white;
+  width: 170px;
+  height: 50px;
+  font-size: 17px;
+}
+
+.mat-radio-button{
+  font-family: 'Montserrat', sans-serif;
+  color: #2F2F2F;
+  font-size:18px;
+  font-weight: 500;
+  margin: 0px 30px 30px 0px;
+}
+
+.remarque{
+  width: 580px;
 }

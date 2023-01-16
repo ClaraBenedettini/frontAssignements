@@ -20,8 +20,8 @@ export class SubjectsService {
     constructor(
         private http: HttpClient) { }
 
-    uri = "http://localhost:8010/api/subjects";
-    //uri = "https://api-cours-angular-2023.herokuapp.com/api/subjects";
+    // uri = "http://localhost:8010/api/subjects";
+    uri = "https://api-angular.onrender.com/api/subjects";
 
 
     getSubject(id: String): Observable<Subject> {

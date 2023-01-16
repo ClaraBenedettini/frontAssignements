@@ -1,20 +1,91 @@
-
-
 <div class="container" *ngIf="assignment">
- <h1>Modification de {{assignment.nom}}</h1>
- <form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">
-   <mat-form-field>
-     <input matInput placeholder="Edition du nom" [(ngModel)]="nom" name="assignment-name">
-   </mat-form-field>
-   <mat-form-field>
-     <input matInput [matDatepicker]="picker" placeholder="Edition de la date" [(ngModel)]="dateLimite" name="date">
-     <mat-datepicker-toggle matSuffix [for]="picker">
-     </mat-datepicker-toggle>
-     <mat-datepicker #picker></mat-datepicker>
-   </mat-form-field>
+
+  <div>
+    <h1>Modification de {{assignment.nom}}</h1>
+    <img src="assets/imgs/edit-assignment.png">
+  </div>
+
+  <form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset();">
+
+    <div class="form-fields">
+      <mat-form-field>
+        <input matInput (input)="changeNom($event)" [defaultValue]="nom" [(ngModel)]="nom" name="assignment-name" name="nom" placeholder="Nom du devoir" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input matInput  (dateChange)="changeDate($event.value)" [defaultValue]="dateLimite" [matDatepicker]="picker" placeholder="Date limite de rendu" [(ngModel)]="dateLimite" name="date"
+          required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-fields">
+      <mat-form-field appearance="fill" >
+        <mat-label>Promotion</mat-label>
+        <mat-select (selectionChange)="changePromotion($event.value)" [(value)]="promotionSelectionnee"  required >
+          <mat-option *ngFor="let promotion of promotions" [value]="promotion" > {{ promotion }} </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Matière</mat-label>
+        <mat-select (selectionChange)="changeMatiere($event.value)" [(value)]="matiereSelectionnee"  required>
+          <mat-option *ngFor="let matiere of matieres" [value]="matiere._id">
+            <div style="display: flex; align-items: center">
+              {{ matiere.libelle}} - {{ matiere.prof}}
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <hr>
+
+    <div class="form-fields">
+      <div class="radioButton">
+        <mat-radio-group (change)="changeEtat()" aria-label="Rendu" color="primary">
+            <div *ngIf="this.etat; else nonRendu">
+                <mat-radio-button value="{{ true }}" checked>Rendu</mat-radio-button>
+                <mat-radio-button value="{{ false }}">Non rendu</mat-radio-button>
+            </div>
+            <ng-template #nonRendu>
+                <mat-radio-button value="{{ true }}">Rendu</mat-radio-button>
+                <mat-radio-button value="{{ false }}" checked>Non rendu</mat-radio-button>
+            </ng-template>
+        </mat-radio-group>
+      </div>
+    </div>
    
-   <button mat-raised-button color="primary" [disabled]="((!nom)||(!dateLimite))">
-    Sauver
-  </button>
-</form>
+    <div class="form-fields">
+      <mat-form-field appearance="fill">
+        <input matInput (input)="changeEleve($event)" [defaultValue]="nomEleve" [(ngModel)]="nomEleve" name="nomEleve" placeholder="Élève" required>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Note</mat-label>
+        <mat-select (selectionChange)="changeNote($event.value)" [(value)]="noteSelectionnee" required>
+          <mat-option *ngFor="let note of notes" [value]="note">
+            {{ note }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-fields">
+      <mat-form-field appearance="fill" class="remarque">
+        <mat-label>Commentaire</mat-label>
+        <textarea matInput (input)="changeRemarque($event)" [defaultValue]="remarque" [(ngModel)]="remarque" name="remarque" placeholder="Remarque"></textarea>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-fields">
+      <button mat-raised-button (click)="onSaveAssignment()">
+        Modifier le devoir
+      </button>
+    </div>
+
+  </form>
+
 </div>
