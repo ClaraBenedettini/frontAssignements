@@ -1,0 +1,61 @@
+<div style="display:flex">
+  <app-sidenav></app-sidenav>
+
+  <!-- RECHERCHE PAR NOM -->
+  <main class="container">
+    <mat-form-field>
+      <mat-label>Nom du devoir</mat-label>
+      <input matInput (input)="applyFilter($event)" #input>
+    </mat-form-field>
+
+    <!-- TABLEAU -->
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="nom">
+          <th mat-header-cell *matHeaderCellDef> Nom </th>
+          <td mat-cell *matCellDef="let assignments"> {{assignments.nom}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="matiere">
+          <th mat-header-cell *matHeaderCellDef> Matiere </th>
+          <td mat-cell *matCellDef="let assignments"> {{assignments.nomMatiere}} </td>
+
+        </ng-container>
+
+        <ng-container matColumnDef="dateLimite">
+          <th mat-header-cell *matHeaderCellDef> Date limite de rendu </th>
+          <td mat-cell *matCellDef="let assignments"> {{assignments.dateLimite}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="formationConcernee">
+          <th mat-header-cell *matHeaderCellDef> Promotion </th>
+          <td mat-cell *matCellDef="let assignments"> {{assignments.formationConcernee}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="etat">
+          <th mat-header-cell *matHeaderCellDef> État </th>
+          <td mat-cell *matCellDef="let assignments"> {{assignments.etat}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="assignemntRow"
+          (click)="this.navigateTo(row._id)"></tr>
+      </table>
+
+      <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+
+    <!-- BOUTON AJOUT DEVOIR, visible uniquement par utilisateur Admin -->
+    <div class="ajouterBtn" *ngIf="isAdmin()">
+      <a routerLink="/add">
+        <button mat-raised-button>
+          Ajouter un devoir
+        </button>
+      </a>
+    </div>
+
+  </main>
+</div>

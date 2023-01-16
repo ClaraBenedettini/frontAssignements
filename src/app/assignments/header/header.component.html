@@ -1,0 +1,62 @@
+<mat-toolbar style="margin-bottom:0">
+
+    <p>GESTION DES DEVOIRS</p>
+
+    <span class="example-spacer"></span>
+
+
+    <a routerLink="/home">
+        <img src="assets/imgs/logomiage.png">
+    </a>
+
+    <span class="example-spacer"></span>
+
+    <!-- Si l'utilisateur est connecté, on cache cette partie -->
+    <div *ngIf="!this.isLogged()">
+        <button mat-icon-button class="example-icon" (click)="openModal()">
+            <mat-icon>login</mat-icon>
+        </button>
+        <span>Se connecter</span>
+    </div>
+
+    <!-- Si l'utilisateur est connecté, on remplace le bouton "Se connecter" par "Se déconnecter" -->
+    <div *ngIf="this.isLogged()">
+        <button mat-icon-button class="example-icon" (click)="disconnect()">
+            <mat-icon>logout</mat-icon>
+        </button>
+        <span>Se déconnecter</span>
+    </div>
+
+     <!-- Formulaire de connexion (boîte de dialogue) -->
+    <div *ngIf="showModal">
+        <div class="modal-content">
+            <form>
+                <div>
+                    <button mat-icon-button class="example-icon" (click)="closeModal()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput type="text" placeholder="Login" [formControl]="login">
+                        <mat-error *ngIf="login.hasError('required')">
+                            Champs requis
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput type="password" placeholder="Mot de passe" [formControl]="password">
+                        <mat-error *ngIf="password.hasError('required')">
+                            Champs requis
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button class="login-button" (click)="log()">Se connecter</button>
+                    <p *ngIf="error" class="error">Login ou mot de passe incorrect</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</mat-toolbar>

@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>Vue détaillée</h1>
+
+  <!-- DÉTAILS -->
+  <div class="details" *ngIf="assignmentTransmis">
+    <h2>Nom du devoir : {{assignmentTransmis.nom}}</h2>
+    <p>À rendre pour le {{assignmentTransmis.dateLimite|date}}</p>
+    <p>Promotion concernée : {{assignmentTransmis.formationConcernee}}</p>
+    <!-- Photo matière -->
+    <div *ngIf="matiereConcernee">
+      <p>Matière : {{matiereConcernee.libelle}}</p>
+      <img src="{{matiereConcernee.img_matiere}}">
+      <!-- photo prof -->
+      <p>Enseignant : {{matiereConcernee.prof}}</p>
+      <img src="{{matiereConcernee.img_prof}}">
+    </div>
+ 
+    <hr>
+    <p>Élève : {{assignmentTransmis.nomEleve }}</p>
+    <div class="flex">
+      <p>Devoir rendu : </p>
+      <span *ngIf="assignmentTransmis.etat; else nonsoumis">
+        <mat-icon class="rendu">check_cricle</mat-icon>
+      </span>
+      <ng-template #nonsoumis>
+        <p class="nonRendu"> Non</p>
+        <mat-icon class="nonRendu">cancel</mat-icon>
+      </ng-template>
+    </div>
+    <!-- Si devoir non rendu, pas de note et de commentaire -->
+    <p>Note : {{ assignmentTransmis.note }}/20</p>
+    <p>Commentaire : {{ assignmentTransmis.remarque }}</p>
+  </div>
+
+  <!-- BOUTONS -->
+  <div class="flex" *ngIf="assignmentTransmis">
+    <div *ngIf="isAdmin()">
+      <nav><a routerLink="/assignment/{{assignmentTransmis._id}}/edit">
+          <button mat-stroked-button class="btnModif" color="primary" type="submit">Modifier le devoir</button>
+        </a></nav>
+    </div>
+    <div *ngIf="isAdmin()">
+      <button mat-flat-button color="warn" class="btnSuppr" (click)="onDelete()">Supprimer le devoir</button>
+    </div>
+  </div>
+
+</div>

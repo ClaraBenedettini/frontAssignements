@@ -1,0 +1,62 @@
+<div class="sidenav-container">
+
+    <!-- MESSAGE D'ACCUEIL -->
+    <!-- Si l'utilisateur est connecté -->
+    <div *ngIf="isLogged(); else notLogged">
+        <h1>Bonjour</h1>
+        <p>Bienvenue dans votre espace personnel.</p>
+    </div>
+
+    <!-- Si l'utilisateur n'est pas connecté -->
+    <ng-template #notLogged>
+        <div>
+            <h1>Bonjour !</h1>
+            <p>Vous n'êtes pas connecté. Vous ne pouvez que consulter les travaux demandés.</p>
+            <p>Connectez-vous pour accéder à votre espace personnel.</p>
+        </div>
+    </ng-template>
+
+    <div class="space"></div>
+
+    <!-- FILTRES -->
+    <div class="filters">
+        <h2>Filtrer par :</h2>
+        <form>
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Promotion</mat-label>
+                    <mat-select (selectionChange)="changePromotion($event.value)" >
+                        <mat-option *ngFor="let promotion of promotions" [value]="promotion" >
+                            <div style="display: flex; align-items: center">
+                                {{ promotion}}
+                            </div>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Matière</mat-label>
+                    <mat-select (selectionChange)="changeMatiere($event.value)">
+                        <mat-option *ngFor="let matiere of matieres" [value]="matiere._id">
+                            <div style="display: flex; align-items: center">
+                                {{ matiere.libelle}} - {{ matiere.prof}}
+                            </div>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="radioButton">
+                <mat-radio-group (change)="changeFilter($event.value)" aria-label="Rendu" color="primary">
+                    <div>
+                        <mat-radio-button value="{{ 1 }}">Rendu</mat-radio-button>
+                        <mat-radio-button value="{{ 2 }}">Non rendu</mat-radio-button>
+                        <mat-radio-button value="{{ 3 }}" checked>Tous</mat-radio-button>
+                    </div>
+
+                </mat-radio-group>
+            </div>
+        </form>
+    </div>
+
+</div>

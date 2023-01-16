@@ -1,0 +1,47 @@
+<div class="container">
+
+  <div>
+    <h1>Ajouter un devoir</h1>
+    <img src="assets/imgs/add-assignment.png">
+  </div>
+
+  <form ngForm (submit)="onSubmit(); assignmentForm.reset()" #assignmentForm class="form">
+
+    <div class="form-fields">
+      <mat-form-field>
+        <input matInput [(ngModel)]="nom" name="nom" placeholder="Nom du devoir" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input matInput [matDatepicker]="picker" placeholder="Date limite de rendu" [(ngModel)]="dateLimite" name="date"
+          required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-fields">
+      <mat-form-field appearance="fill">
+        <mat-label>Promotion</mat-label>
+        <mat-select (selectionChange)="changePromotion($event.value)" required>
+          <mat-option *ngFor="let promotion of promotions" [value]="promotion" > {{ promotion }} </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Matière</mat-label>
+        <mat-select required>
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-fields">
+      <button mat-raised-button (click)="openSnackBar()">
+        Ajouter le devoir
+      </button>
+    </div>
+
+  </form>
+
+</div>

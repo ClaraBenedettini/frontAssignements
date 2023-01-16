@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+h1{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+    color: #2F2F2F;
+    margin-left: 35px;
+  }
+
+  h2{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #2F2F2F;
+    margin: 0px 0px 20px 35px;
+  }
+  
+  p{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0px 0px 0px 35px;
+    font-size:16px;
+    font-weight: 500;
+    color: #18949c;
+  }
+
+  .space{
+    margin: 45px 0px 0px 0px;
+  }
+
+  .sidenav-container {
+    width:400px;
+    background-color: #e4eaec;
+    height: calc(205.6vh - 115vh);
+    box-shadow: #2F2F2F 0px 20px 15px;
+    background-color: #e4eaec;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 30px 25px 0px 0px;
+  }
+
+  .mat-raised-button{
+    margin: 20px 25px 0px 30px;
+    background-color: #18949c;
+    color: white;
+}
+
+.filters{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+mat-form-field{
+  margin: 0px 0px 0px 35px;
+  width: 300px;
+}
+
+.radioButton{
+  margin: 5px 0px 20px 35px;
+}
+
+.mat-radio-button{
+  font-family: 'Montserrat', sans-serif;
+  color:grey;
+  font-size:16px;
+  font-weight: 500;
+  margin-right: 12px;
+}
